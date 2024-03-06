@@ -1,4 +1,4 @@
-import { createSigner } from "./createSigner";
+import { smartAccountClient } from "./createSmartAccountClient";
 import { parseEther } from "viem";
 import type { SendUserOperationResult } from "@alchemy/aa-core";
 
@@ -9,15 +9,16 @@ const ADDR = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"; // replace with the a
  * @note Seperating the logic to create the account, and the logic to send the transaction
  */
 export async function main() {
-  const signer = await createSigner();
-
   const amountToSend: bigint = parseEther("0.0001");
 
-  const result: SendUserOperationResult = await signer.sendUserOperation({
-    target: ADDR,
-    data: "0x",
-    value: amountToSend,
-  });
+  const result: SendUserOperationResult =
+    await smartAccountClient.sendUserOperation({
+      uo: {
+        target: ADDR,
+        data: "0x",
+        value: amountToSend,
+      },
+    });
 
   console.log("User operation result: ", result);
 
@@ -25,19 +26,19 @@ export async function main() {
     "\nWaiting for the user operation to be included in a mined transaction..."
   );
 
-  const txHash = await signer.waitForUserOperationTransaction(
-    result.hash as `0x${string}`
+  const txHash = await smartAccountClient.waitForUserOperationTransaction(
+    result
   );
 
   console.log("\nTransaction hash: ", txHash);
 
-  const userOpReceipt = await signer.getUserOperationReceipt(
+  const userOpReceipt = await smartAccountClient.getUserOperationReceipt(
     result.hash as `0x${string}`
   );
 
   console.log("\nUser operation receipt: ", userOpReceipt);
 
-  const txReceipt = await signer.rpcClient.waitForTransactionReceipt({
+  const txReceipt = await smartAccountClient.waitForTransactionReceipt({
     hash: txHash,
   });
 
