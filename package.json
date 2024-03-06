@@ -5,10 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "execute:ts-core": "tsx -r dotenv/config src/ts/core/index.ts",
-    "execute:ts-ethers": "tsx -r dotenv/config src/ts/ethers/index.ts",
-    "execute:js-core": "tsx -r dotenv/config src/js/core/index.js",
-    "execute:js-ethers": "tsx -r dotenv/config src/js/ethers/index.js",
+    "execute:ts": "tsx -r dotenv/config src/ts/index.ts",
+    "execute:js": "tsx -r dotenv/config src/js/index.js",
     "getCFaddress": "tsx -r dotenv/config scripts/getCounterfactual.ts",
     "sendETH": "tsx -r dotenv/config scripts/sendEthToSCA.ts"
   },
