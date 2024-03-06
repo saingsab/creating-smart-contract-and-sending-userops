@@ -1,4 +1,4 @@
-import { createSigner } from "./createSigner";
+import { smartAccountClient } from "./createSmartAccountClient";
 import { parseEther } from "viem";
 
 const ADDR = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"; // replace with the adress you want to send SepoliaETH to, unless you want to send ETH to Vitalik :)
@@ -8,14 +8,14 @@ const ADDR = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"; // replace with the a
  * @note Seperating the logic to create the account, and the logic to send the transaction
  */
 export async function main() {
-  const signer = await createSigner();
-
   const amountToSend = parseEther("0.0001");
 
-  const result = await signer.sendUserOperation({
-    target: ADDR,
-    data: "0x",
-    value: amountToSend,
+  const result = await smartAccountClient.sendUserOperation({
+    uo: {
+      target: ADDR,
+      data: "0x",
+      value: amountToSend,
+    },
   });
 
   console.log("User operation result: ", result);
@@ -24,15 +24,19 @@ export async function main() {
     "\nWaiting for the user operation to be included in a mined transaction..."
   );
 
-  const txHash = await signer.waitForUserOperationTransaction(result.hash);
+  const txHash = await smartAccountClient.waitForUserOperationTransaction(
+    result
+  );
 
   console.log("\nTransaction hash: ", txHash);
 
-  const userOpReceipt = await signer.getUserOperationReceipt(result.hash);
+  const userOpReceipt = await smartAccountClient.getUserOperationReceipt(
+    result.hash
+  );
 
   console.log("\nUser operation receipt: ", userOpReceipt);
 
-  const txReceipt = await signer.rpcClient.waitForTransactionReceipt({
+  const txReceipt = await smartAccountClient.waitForTransactionReceipt({
     hash: txHash,
   });
 

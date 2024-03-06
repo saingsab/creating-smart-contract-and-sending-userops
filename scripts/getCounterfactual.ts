@@ -1,4 +1,4 @@
-import createSigner from "../helpers/createSigner";
+import { smartAccountClient } from "../helpers/createSmartAccountClient";
 import fs from "fs";
 import path from "path";
 import * as dotenv from "dotenv";
@@ -8,9 +8,9 @@ const FILENAME = "accountInfo.json";
 const __dirname = import.meta.url.split("/scripts")[0].split("file://")[1];
 
 async function main() {
-  const signer = await createSigner();
+  const signer = smartAccountClient;
 
-  const counterfactualAddress = await signer.account.getAddress();
+  const counterfactualAddress = await signer.getAddress();
 
   const filePath = path.join(__dirname, FILENAME);
   let data = {};
