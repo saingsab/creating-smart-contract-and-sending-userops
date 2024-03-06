@@ -4,10 +4,8 @@ This repository serves as the codebase for Alchemy's Creating a Smart Contract A
 
 We've structured this project to implement the process in four different ways:
 
-- Using TypeScript with AA-core
-- Using JavaScript with AA-core
-- Using TypeScript with AA-ethers
-- Using JavaScript with AA-ethers
+- Using TypeScript with AA-core & AA-Alchemy
+- Using JavaScript with AA-core & AA-Alchemy
 
 ## Prerequisites
 
@@ -74,7 +72,5 @@ The respective index file in the relevant combination (TypeScript/JavaScript, co
 
 The four main commands are:
 
-- `npm run execute:ts-core`
-- `npm run execute:ts-ethers`
-- `npm run execute:js-core`
-- `npm run execute:js-ethers`
+- `npm run execute:ts`
+- `npm run execute:js`
