@@ -31,7 +31,7 @@ export async function main() {
   console.log("\nTransaction hash: ", txHash);
 
   const userOpReceipt = await smartAccountClient.getUserOperationReceipt(
-    result
+    result.hash
   );
 
   console.log("\nUser operation receipt: ", userOpReceipt);
