@@ -68,7 +68,7 @@ Let's briefly review the files within the [Scripts](https://github.com/alchemypl
 
 ## Executing the code
 
-The respective index file in the relevant combination (TypeScript/JavaScript, core/ethers) will be executed depending on which command you run. They each accomplish the same goal, creating a SCA and sending ETH from it - only the methodology differs.
+The respective index file in the relevant language (TypeScript/JavaScript) will be executed depending on which command you run. They each accomplish the same goal, creating a SCA and sending ETH from it - only the methodology differs.
 
 The four main commands are:
 
